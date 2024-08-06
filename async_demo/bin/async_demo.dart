@@ -6,12 +6,23 @@
 // 3 caso o email ou senha sejão inválidos, printe a mensagem de erro. 
 
 
-void main() {
+void main() async{
+  try {
+        String token = await login('email@email.com', '123');
+        num saldo = await consultarSaldo(token);
+        print(saldo);
+  }catch (error) {
+    print(error);
+  } 
+}
+
+
+void main2() {
   login('email@email.com', '123').then((token){
     print("Usuário consultado com sucesso!");
     consultarSaldo(token).then((saldo){
       print(saldo);
-    }).catchError((value2){
+    }).catchError((saldo){
       print('Erro ao consultar o usuário!');
     });
   }).catchError((error){
@@ -19,6 +30,7 @@ void main() {
   });
   
 }
+
 
 
 Future<String> login(String email, String senha) async {
